@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:vm="clr-namespace:Gym_Tracker.ViewModels"
              x:Class="Gym_Tracker.MainPage">
 
@@ -9,66 +10,82 @@
         <vm:ExerciseViewModel />
     </ContentPage.BindingContext>
 
-    <CollectionView ItemsSource="{Binding GroupedExercises}" SelectionMode="Single" IsGrouped="True">
-        <CollectionView.GroupHeaderTemplate>
-            <DataTemplate>
-                <StackLayout BackgroundColor="LightGray" Padding="10">
-                    <Label Text="{Binding GroupName}" FontSize="16" FontAttributes="Bold" />
-                </StackLayout>
-            </DataTemplate>
-        </CollectionView.GroupHeaderTemplate>
-        <CollectionView.ItemsLayout>
-            <LinearItemsLayout Orientation="Vertical" ItemSpacing="15" />
-        </CollectionView.ItemsLayout>
-        <CollectionView.HeaderTemplate>
-            <DataTemplate>
-                <StackLayout BackgroundColor="LightGray">
-                    <Label Margin="0,15,0,15"
-                       Text="Get in shape with these exercises 🔒"
-                       FontSize="12"
-                       FontAttributes="Bold"
-                       HorizontalTextAlignment="Center"/>
-                </StackLayout>
-            </DataTemplate>
-        </CollectionView.HeaderTemplate>
-        <CollectionView.FooterTemplate>
-            <DataTemplate>
-                <StackLayout BackgroundColor="LightGray">
-                    <Label Margin="0,0,0,0"
-                       Text="© 2025 Doriano Benyocki"
-                       FontSize="12"
-                       FontAttributes="Bold"
-                       HorizontalTextAlignment="Center"/>
-                </StackLayout>
-            </DataTemplate>
-        </CollectionView.FooterTemplate>
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <Grid Padding="10">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.RowSpan="2"
-                       Source="{Binding BaseImage}"
-                       Aspect="AspectFill"
-                       HeightRequest="60"
-                       WidthRequest="60" />
-                    <Label Grid.Column="1"
-                       Text="{Binding Name}"
-                       FontAttributes="Bold" />
-                    <Label Grid.Row="1"
-                       Grid.Column="1"
-                       Text="{Binding Description}"
-                       FontAttributes="Italic"
-                       VerticalOptions="End" />
-                </Grid>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+    <Grid>
+        <Grid.RowDefinitions>
+            <!-- Header fixes at the top -->
+            <RowDefinition Height="Auto"/>
+            <!-- Scrollable content -->
+            <RowDefinition Height="*"/>
+            <!-- Footer fixes at the bottom -->
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- External Header -->
+        <StackLayout Grid.Row="0" BackgroundColor="LightGray" Padding="10" Margin="0,10,0,10">
+            <Label Text="Get in shape with these exercises 🔒"
+                   FontSize="12"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"
+                   Margin="0,15,0,15"/>
+        </StackLayout>
+
+        <!-- CollectionView for the grouped exercises -->
+        <CollectionView Grid.Row="1" ItemsSource="{Binding GroupedExercises}" SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <toolkit:Expander>
+                        <toolkit:Expander.Header>
+                            <StackLayout BackgroundColor="LightGray" Padding="10">
+                                <Label Text="{Binding GroupName}"
+                                       FontSize="16" 
+                                       FontAttributes="Bold"/>
+                            </StackLayout>
+                        </toolkit:Expander.Header>
+                        <toolkit:Expander.Content>
+                            <!-- Bind directly to the ExerciseGroup (which is enumerable) -->
+                            <CollectionView ItemsSource="{Binding .}" SelectionMode="Single">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Padding="10">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Image Grid.RowSpan="2"
+                                                   Source="{Binding BaseImage}"
+                                                   Aspect="AspectFill"
+                                                   HeightRequest="60"
+                                                   WidthRequest="60" />
+                                            <Label Grid.Column="1"
+                                                   Text="{Binding Name}"
+                                                   FontAttributes="Bold" />
+                                            <Label Grid.Row="1"
+                                                   Grid.Column="1"
+                                                   Text="{Binding Description}"
+                                                   FontAttributes="Italic"
+                                                   VerticalOptions="End" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </toolkit:Expander.Content>
+                    </toolkit:Expander>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- External Footer -->
+        <StackLayout Grid.Row="2" BackgroundColor="LightGray" Padding="10">
+            <Label Text="© 2025 Doriano Benyocki"
+                   FontSize="12"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"/>
+        </StackLayout>
+    </Grid>
 
 </ContentPage>

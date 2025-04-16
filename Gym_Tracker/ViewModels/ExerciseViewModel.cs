@@ -85,11 +85,15 @@ namespace Gym_Tracker.ViewModels
                 new ExerciseGroup(areobicExercises,new List<Exercise>
                 {
                     new Exercise { Name = "Burpee", Description = "A full-body exercise improving cardio and strength.", BaseImage = "dumbbell.png" },
+                    new Exercise { Name = "Jumping Jacks", Description = "A dynamic cardio exercise.", BaseImage = "dumbbell.png" },
+                    new Exercise { Name = "Mountain Climbers", Description = "Improves cardio and core strength.", BaseImage = "dumbbell.png"}
                 })
             };
-        }
-        public event PropertyChangedEventHandler? PropertyChanged;
 
+        }
+
+
+        public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
