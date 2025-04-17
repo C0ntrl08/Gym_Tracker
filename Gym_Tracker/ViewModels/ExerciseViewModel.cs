@@ -1,4 +1,6 @@
-﻿using Gym_Tracker.Models;
+﻿using CommunityToolkit.Mvvm.Input;
+using Gym_Tracker.Models;
+using Gym_Tracker.Pages;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -25,9 +27,16 @@ namespace Gym_Tracker.ViewModels
                         Description = "A basic upper-body exercise targeting chest, shoulders, and triceps.",
                         LongDescription = "Push-ups are a classic exercise to build upper-body strength. They primarily target the chest, shoulders, and triceps, and also engage the core muscles. To perform a push-up, start in a plank position, keep your body straight, and lower yourself until your chest almost touches the floor. Then push back up.",
                         BaseImage = "pullup.png",
-                        VideoUrl = "https://www.youtube.com/watch?v=Eh00_rniF8E&t=0s" // Replace with a valid URL
+                        VideoUrl = "https://www.youtube.com/watch?v=Eh00_rniF8E&t=0s"
                     },
-                    new Exercise { Name = "Plank", Description = "Strengthens the core and stabilizes the spine.", BaseImage = "pullup.png" },
+                    new Exercise
+                    { 
+                        Name = "Plank",
+                        Description = "Strengthens the core and stabilizes the spine.",
+                        LongDescription = "Plank is lorem ipsum",
+                        BaseImage = "pullup.png",
+                        VideoUrl = "https://www.youtube.com/watch?v=u6ZelKyUM6g"
+                    },
                     new Exercise { Name = "Squat", Description = "Engages lower body muscles, focusing on quads and glutes.", BaseImage = "pullup.png" },
                     new Exercise { Name = "Pull-up", Description = "Builds upper-body strength, mainly in the back and biceps.", BaseImage = "pullup.png" },
                     new Exercise { Name = "Dips", Description = "Targets triceps, chest, and shoulders.", BaseImage = "pullup.png" },
@@ -61,18 +70,19 @@ namespace Gym_Tracker.ViewModels
                 })
             };
         }
-
+        
         public ICommand ExerciseSelectedCommand => new Command<Exercise>(async (selectedExercise) =>
         {
-            if (selectedExercise == null)
+            if (selectedExercise is null)
                 return;
 
-            // Use Shell navigation or any other navigation method.
+            // Create a dictionary with the navigation parameter with key "Exercise".
             var navigationParameter = new Dictionary<string, object>
-    {
-        { "SelectedExercise", selectedExercise }
-    };
-            await Shell.Current.GoToAsync(nameof(Gym_Tracker.Pages.ExerciseDetailPage), navigationParameter);
+            {
+                 {"Exercise", selectedExercise }
+            };
+
+            await Shell.Current.GoToAsync(nameof(ExerciseDetailPage), navigationParameter);
         });
 
         public event PropertyChangedEventHandler? PropertyChanged;

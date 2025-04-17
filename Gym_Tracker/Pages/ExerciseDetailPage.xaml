@@ -4,11 +4,23 @@
              x:Class="Gym_Tracker.Pages.ExerciseDetailPage"
              xmlns:viewmodel="clr-namespace:Gym_Tracker.ViewModels"
              x:DataType="viewmodel:ExerciseDetailViewModel"
-             Title="Exercise Details">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="{Binding PageTitle}">
+    
+    <!-- Set the BindingContext to an instance of ExerciseDetailViewModel -->
+    <ContentPage.BindingContext>
+        <viewmodel:ExerciseDetailViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="10">
+            <Label Text="{Binding Name}" 
+                   FontSize="Large" 
+                   FontAttributes="Bold"/>
+
+            <Label Text="{Binding LongDescription}" FontSize="Medium"/>
+
+            <!-- You can display a video via WebView, or use an appropriate video control -->
+            <WebView Source="{Binding VideoUrl}" HeightRequest="200"/>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
