@@ -24,7 +24,7 @@
 		<ApplicationTitle>Gym_Tracker</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.gym_tracker</ApplicationId>
+		<ApplicationId>com.companyname.gymtracker</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
