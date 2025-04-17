@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:model="clr-namespace:Gym_Tracker.Models"
              xmlns:vm="clr-namespace:Gym_Tracker.ViewModels"
              x:Class="Gym_Tracker.MainPage"
              x:Name="ThisPage">
@@ -48,6 +49,11 @@
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
                                         <Grid Padding="10">
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer NumberOfTapsRequired="2"
+                                          Command="{Binding Source={x:Reference ThisPage}, Path=BindingContext.ExerciseSelectedCommand}"
+                                          CommandParameter="{Binding .}" />
+                                            </Grid.GestureRecognizers>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto" />
                                                 <RowDefinition Height="Auto" />
@@ -56,7 +62,6 @@
                                                 <ColumnDefinition Width="Auto" />
                                                 <ColumnDefinition Width="*" />
                                             </Grid.ColumnDefinitions>
-
                                             <Image Grid.RowSpan="2"
                                                    Source="{Binding BaseImage}"
                                                    Aspect="AspectFill"

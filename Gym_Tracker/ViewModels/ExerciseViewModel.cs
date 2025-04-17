@@ -1,6 +1,7 @@
 ﻿using Gym_Tracker.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Input;
 
 namespace Gym_Tracker.ViewModels
 {
@@ -60,6 +61,19 @@ namespace Gym_Tracker.ViewModels
                 })
             };
         }
+
+        public ICommand ExerciseSelectedCommand => new Command<Exercise>(async (selectedExercise) =>
+        {
+            if (selectedExercise == null)
+                return;
+
+            // Use Shell navigation or any other navigation method.
+            var navigationParameter = new Dictionary<string, object>
+    {
+        { "SelectedExercise", selectedExercise }
+    };
+            await Shell.Current.GoToAsync(nameof(Gym_Tracker.Pages.ExerciseDetailPage), navigationParameter);
+        });
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
