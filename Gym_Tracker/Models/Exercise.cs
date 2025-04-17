@@ -5,5 +5,9 @@
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public string BaseImage { get; set; } = string.Empty;
+
+        // Adding new Properties to implement the DetailsPage feature
+        public string LongDescription { get; set; } = string.Empty;
+        public string VideoUrl { get; set; } = string.Empty;
     }
 }
