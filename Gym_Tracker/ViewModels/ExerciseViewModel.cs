@@ -40,7 +40,9 @@ namespace Gym_Tracker.ViewModels
                         VideoUrl = "https://www.youtube.com/watch?v=u6ZelKyUM6g",
                         Difficulty = DifficultyLevel.Medium
                     },
-                    new Exercise { Name = "Squat", Description = "Engages lower body muscles, focusing on quads and glutes.", BaseImage = "pullup.png" },
+                    new Exercise { Name = "Squat", Description = "Engages lower body muscles, focusing on quads and glutes.", BaseImage = "pullup.png",
+                    Difficulty= DifficultyLevel.Hard
+                    },
                     new Exercise { Name = "Pull-up", Description = "Builds upper-body strength, mainly in the back and biceps.", BaseImage = "pullup.png" },
                     new Exercise { Name = "Dips", Description = "Targets triceps, chest, and shoulders.", BaseImage = "pullup.png" },
                     new Exercise { Name = "Leg Raises", Description = "Focuses on core strength and lower abdominal muscles.", BaseImage = "pullup.png" },
