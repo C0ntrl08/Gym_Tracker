@@ -27,7 +27,9 @@ namespace Gym_Tracker.ViewModels
                         Description = "A basic upper-body exercise targeting chest, shoulders, and triceps.",
                         LongDescription = "Push-ups are a classic exercise to build upper-body strength. They primarily target the chest, shoulders, and triceps, and also engage the core muscles. To perform a push-up, start in a plank position, keep your body straight, and lower yourself until your chest almost touches the floor. Then push back up.",
                         BaseImage = "pullup.png",
-                        VideoUrl = "https://www.youtube.com/watch?v=Eh00_rniF8E&t=0s"
+                        VideoUrl = "https://www.youtube.com/watch?v=Eh00_rniF8E&t=0s",
+                        Difficulty = DifficultyLevel.Easy
+
                     },
                     new Exercise
                     { 
@@ -35,7 +37,8 @@ namespace Gym_Tracker.ViewModels
                         Description = "Strengthens the core and stabilizes the spine.",
                         LongDescription = "Plank is lorem ipsum",
                         BaseImage = "pullup.png",
-                        VideoUrl = "https://www.youtube.com/watch?v=u6ZelKyUM6g"
+                        VideoUrl = "https://www.youtube.com/watch?v=u6ZelKyUM6g",
+                        Difficulty = DifficultyLevel.Medium
                     },
                     new Exercise { Name = "Squat", Description = "Engages lower body muscles, focusing on quads and glutes.", BaseImage = "pullup.png" },
                     new Exercise { Name = "Pull-up", Description = "Builds upper-body strength, mainly in the back and biceps.", BaseImage = "pullup.png" },

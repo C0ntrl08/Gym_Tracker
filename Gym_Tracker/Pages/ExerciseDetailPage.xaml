@@ -3,8 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Gym_Tracker.Pages.ExerciseDetailPage"
              xmlns:viewmodel="clr-namespace:Gym_Tracker.ViewModels"
+             xmlns:helper="clr-namespace:Gym_Tracker.Helpers"
              x:DataType="viewmodel:ExerciseDetailViewModel"
              Title="{Binding PageTitle}">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Register the converter from the Helpers folder -->
+            <helper:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     
     <!-- Set the BindingContext to an instance of ExerciseDetailViewModel -->
     <ContentPage.BindingContext>
@@ -12,15 +21,73 @@
     </ContentPage.BindingContext>
 
     <ScrollView>
-        <StackLayout Padding="20" Spacing="10">
-            <Label Text="{Binding Name}" 
-                   FontSize="Large" 
-                   FontAttributes="Bold"/>
+        <StackLayout Padding="20" Spacing="20">
 
-            <Label Text="{Binding LongDescription}" FontSize="Medium"/>
+            <!-- Top Section: Exercise Name -->
+            <Label 
+                Text="{Binding Name}" 
+                FontSize="Large" 
+                FontAttributes="Bold"
+                HorizontalOptions="Start" />
 
-            <!-- You can display a video via WebView, or use an appropriate video control -->
-            <WebView Source="{Binding VideoUrl}" HeightRequest="200"/>
+            <!-- Enlarged Difficulty Display Section -->
+            <Frame BackgroundColor="LightGray"
+                   Padding="10"
+                   CornerRadius="10">
+                <StackLayout Spacing="10">
+                    <!-- Text representation -->
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Label Text="Difficulty: " 
+                               FontAttributes="Bold" 
+                               VerticalOptions="Center"
+                               FontSize="Medium"/>
+                        <Label Text="{Binding DifficultyText}" 
+                               VerticalOptions="Center"
+                               FontSize="Medium"/>
+                    </StackLayout>
+                    <!-- Visual Representation using a larger Slider -->
+                    <Slider Minimum="1"
+                            Maximum="3"
+                            Value="{Binding DifficultyValue}"
+                            IsEnabled="False"
+                            HeightRequest="60"
+                            MaximumTrackColor="Blue"/>
+                </StackLayout>
+            </Frame>
+
+            <!-- Description Section -->
+            <Frame
+                Padding="15"
+                BackgroundColor="LightGray"
+                CornerRadius="10"
+                HasShadow="False">
+                <Label 
+                    Text="{Binding LongDescription}" 
+                    FontSize="Medium" 
+                    TextColor="Black" />
+            </Frame>
+
+            <!-- Online Section: Display the video when online -->
+            <ContentView IsVisible="{Binding IsOnline}">
+                <WebView Source="{Binding VideoUrl}" 
+                         HeightRequest="200" />
+            </ContentView>
+
+            <!-- Offline Section: Display offline placeholder and refresh button -->
+            <ContentView IsVisible="{Binding IsOnline, Converter={StaticResource InverseBooleanConverter}}">
+                <StackLayout Spacing="20" 
+                             HorizontalOptions="Center" 
+                             VerticalOptions="Center">
+                    <Image Source="nointernet.png"
+                           WidthRequest="100"
+                           HeightRequest="200"
+                           Aspect="Center" />
+                    <Button Text="Check Connection"
+                            Command="{Binding RefreshConnectivityCommand}" />
+                </StackLayout>
+            </ContentView>
+
+
         </StackLayout>
     </ScrollView>
 </ContentPage>
