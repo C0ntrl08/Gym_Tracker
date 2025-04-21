@@ -1,4 +1,6 @@
-﻿namespace GymTrackerApi.Models
+﻿using System.Text.Json.Serialization;
+
+namespace GymTrackerApi.Models
 {
     public class TrainingExercise
     {
@@ -12,6 +14,7 @@
         public int? DurationMinutes { get; set; }
 
         // Navigation properties: EF Core will link these automatically
+        [JsonIgnore]
         public Training? Training { get; set; }
         public Exercise? Exercise { get; set; }
     }

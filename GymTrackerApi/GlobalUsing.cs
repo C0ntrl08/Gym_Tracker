@@ -11,6 +11,16 @@ global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.IdentityModel.Tokens;
 global using System.Text;
 
+// Controllers
+global using Microsoft.AspNetCore.Mvc;
+global using GymTrackerApi.Models;
+global using Microsoft.AspNetCore.Identity;
+global using GymTrackerApi.DataTransferObjects;
+global using System.IdentityModel.Tokens.Jwt;
+global using System.Security.Claims;
+global using Microsoft.AspNetCore.Authorization;
+global using GymTrackerApi.Services;
+
 global using GymTrackerApi.DataContexts;
 
 

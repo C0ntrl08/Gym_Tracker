@@ -15,5 +15,6 @@
         public string LongDescription { get; set; } = string.Empty;
         public string VideoUrl { get; set; } = string.Empty;
         public DifficultyLevel Difficulty { get; set; }
+        public string Category { get; set; } = string.Empty;
     }
 }
