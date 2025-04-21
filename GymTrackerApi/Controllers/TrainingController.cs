@@ -57,7 +57,22 @@
                 .Where(t => t.ApplicationUserId == userId)
                 .ToListAsync();
 
-            return Ok(trainings);
+            // Map the entity data to TrainingDto.
+            var trainingDtos = trainings.Select(t => new TrainingDto
+            {
+                Id = t.Id,
+                Created = t.Created,
+                Exercises = t.TrainingExercises.Select(te => new TrainingExerciseDto
+                {
+                    ExerciseId = te.ExerciseId,
+                    Sets = te.Sets,
+                    Repetitions = te.Repetitions,
+                    Weight = te.Weight,
+                    DurationMinutes = te.DurationMinutes
+                }).ToList()
+            }).ToList();
+
+            return Ok(trainingDtos);
         }
     }
 }

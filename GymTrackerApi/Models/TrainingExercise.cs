@@ -14,7 +14,7 @@ namespace GymTrackerApi.Models
         public int? DurationMinutes { get; set; }
 
         // Navigation properties: EF Core will link these automatically
-        [JsonIgnore]
+        //[JsonIgnore]
         public Training? Training { get; set; }
         public Exercise? Exercise { get; set; }
     }
