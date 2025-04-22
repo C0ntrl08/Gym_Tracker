@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gym_Tracker", "Gym_Tracker\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymTrackerApi", "GymTrackerApi\GymTrackerApi.csproj", "{088034B3-BFAE-4EB0-A506-B7F54375A7C5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymTracker-Shared-DTOs", "GymTracker-Shared-DTOs\GymTracker-Shared-DTOs.csproj", "{625134CF-3D70-48D0-9326-59927E627BE3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{088034B3-BFAE-4EB0-A506-B7F54375A7C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{088034B3-BFAE-4EB0-A506-B7F54375A7C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{088034B3-BFAE-4EB0-A506-B7F54375A7C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{625134CF-3D70-48D0-9326-59927E627BE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{625134CF-3D70-48D0-9326-59927E627BE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{625134CF-3D70-48D0-9326-59927E627BE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{625134CF-3D70-48D0-9326-59927E627BE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,12 +1,34 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Gym_Tracker.ViewModels"
              x:Class="Gym_Tracker.Pages.TrainingPage"
              Title="Trainings">
+
+    <ContentPage.BindingContext>
+        <viewmodels:TrainingViewModel/>
+    </ContentPage.BindingContext>
+
     <StackLayout Padding="10">
         <Label Text="Your Trainings"
-               FontSize="24"
-               FontAttributes="Bold"
-               HorizontalOptions="Center" />
+           FontSize="24"
+           FontAttributes="Bold"
+           HorizontalOptions="Center" />
+
+        <!-- CollectionView to display the trainings -->
+        <CollectionView ItemsSource="{Binding Trainings}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="10" BackgroundColor="#eee" Margin="0,5">
+                        <Label Text="{Binding Id}" FontSize="20" />
+                        <Label Text="{Binding Created, StringFormat='Created: {0:MM/dd/yyyy HH:mm}'}" 
+                   FontSize="16" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
     </StackLayout>
+
+
 </ContentPage>

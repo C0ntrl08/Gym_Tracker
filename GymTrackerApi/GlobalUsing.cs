@@ -23,5 +23,8 @@ global using GymTrackerApi.Services;
 
 global using GymTrackerApi.DataContexts;
 
+// Shared Library
+global using GymTracker_Shared_DTOs;
+
 
 global using System.Collections.Generic;

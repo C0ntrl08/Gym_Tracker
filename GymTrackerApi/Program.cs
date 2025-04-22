@@ -39,7 +39,14 @@ namespace GymTrackerApi
                     };
                 });
 
-            
+            // Add CORS policy
+            builder.Services.AddCors(options =>
+                options.AddPolicy("AllowAll", policy =>
+                    policy.AllowAnyOrigin()
+                          .AllowAnyMethod()
+                          .AllowAnyHeader()));
+
+
 
             builder.Services.AddAuthorization();
 
@@ -57,7 +64,7 @@ namespace GymTrackerApi
             app.UseAuthentication();
             app.UseAuthorization();
 
-
+            app.UseCors("AllowAll");
             app.MapControllers();
 
             app.Run();
