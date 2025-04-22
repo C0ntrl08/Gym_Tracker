@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:Gym_Tracker.ViewModels"
+             x:Class="Gym_Tracker.Pages.LoginPage"
+             Title="Login">
+
+    <StackLayout Padding="20" Spacing="15">
+        <Label Text="Login to your account" 
+           FontSize="Large" 
+           HorizontalOptions="Center" />
+
+        <Entry Placeholder="Email"
+           Text="{Binding Email}"
+           Keyboard="Email" />
+        <Entry Placeholder="Password"
+           Text="{Binding Password}"
+           IsPassword="True" />
+
+        <Button Text="Login" Command="{Binding LoginCommand}" />
+    </StackLayout>
+</ContentPage>
