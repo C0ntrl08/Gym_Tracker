@@ -1,6 +1,6 @@
-﻿namespace GymTrackerApi.Models
+﻿namespace GymTracker_Shared_DTOs
 {
-    public class Training2
+    public class Training
     {
         public int Id { get; set; }
         // Foreign key to the ApplicationUser

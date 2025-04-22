@@ -1,6 +1,6 @@
-﻿namespace GymTrackerApi.Models
+﻿namespace GymTracker_Shared_DTOs
 {
-    public class TrainingExercise2
+    public class TrainingExercise
     {
         public int Id { get; set; }
         public int TrainingId { get; set; }

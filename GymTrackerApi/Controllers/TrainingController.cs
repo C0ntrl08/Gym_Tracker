@@ -1,4 +1,6 @@
-﻿namespace GymTrackerApi.Controllers
+﻿using GymTracker_Shared_DTOs;
+
+namespace GymTrackerApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

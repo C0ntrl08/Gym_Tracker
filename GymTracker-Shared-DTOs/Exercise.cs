@@ -1,12 +1,12 @@
-﻿namespace GymTrackerApi.Models
+﻿namespace GymTracker_Shared_DTOs
 {
-    public enum DifficultyLevel2
+    public enum DifficultyLevel
     {
         Easy,  //default
         Medium,
         Hard
     }
-    public class Exercise2
+    public class Exercise
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
