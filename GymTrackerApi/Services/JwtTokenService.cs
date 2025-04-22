@@ -28,7 +28,8 @@ namespace GymTrackerApi.Services
                     new Claim("id", user.Id.ToString()),
                     new Claim(ClaimTypes.Email, user.EmailAddress),
                     new Claim("firstname", user.FirstName),
-                    new Claim("lastname", user.LastName)
+                    new Claim("lastname", user.LastName),
+                    new Claim(ClaimTypes.Role, user.Role)
                 }),
                 Expires = DateTime.UtcNow.AddHours(2),
                 Issuer = issuer,

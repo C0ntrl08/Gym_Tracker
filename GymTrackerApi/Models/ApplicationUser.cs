@@ -13,6 +13,7 @@
         [EmailAddress]
         public string EmailAddress { get; set; } = string.Empty;
         public string HashedPassword { get; set; } = string.Empty;
+        public string Role { get; set; } = "User";
         // navigationproperty: one user can have many trainings
         public ICollection<Training> Trainings { get; set; } = new List<Training>();
         
