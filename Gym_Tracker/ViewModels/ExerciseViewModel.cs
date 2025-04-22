@@ -1,9 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using Gym_Tracker.Models;
 using Gym_Tracker.Pages;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
+using GymTracker_Shared_DTOs;
+using Gym_Tracker.Models;
 
 namespace Gym_Tracker.ViewModels
 {

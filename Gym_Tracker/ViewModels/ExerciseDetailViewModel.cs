@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Gym_Tracker.Models;
+using GymTracker_Shared_DTOs;
 using Gym_Tracker.Pages;
 using Microsoft.Maui.Networking;
 
@@ -11,8 +11,6 @@ namespace Gym_Tracker.ViewModels
     {
         [ObservableProperty]
         Exercise? exercise;
-
-        
         public string Name { get; set; } = string.Empty;
         public string LongDescription { get; set; } = string.Empty;
         public string VideoUrl { get; set; } = string.Empty;

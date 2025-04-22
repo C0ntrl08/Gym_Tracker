@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Text.Json;
-using Gym_Tracker.Models;
+using GymTracker_Shared_DTOs;
 
 namespace Gym_Tracker.ViewModels
 {
@@ -14,7 +14,7 @@ namespace Gym_Tracker.ViewModels
             PropertyNameCaseInsensitive = true
         };
         // The list of trainings (returned from the backend as TrainingDto objects)
-        public ObservableCollection<Training> Trainings { get; } = new ObservableCollection<Training>();
+        public ObservableCollection<TrainingExercise> Trainings { get; } = new ObservableCollection<TrainingExercise>();
         public TrainingViewModel()
         {
             // Start the data loading process.
@@ -43,7 +43,7 @@ namespace Gym_Tracker.ViewModels
                 {
                     string json = await response.Content.ReadAsStringAsync();
                     // Reuse the cached JsonOptions instance for deserialization.
-                    var trainings = JsonSerializer.Deserialize<List<Training>>(json, JsonOptions);
+                    var trainings = JsonSerializer.Deserialize<List<TrainingExercise>>(json, JsonOptions);
 
                     // Update the observable collection
                     Trainings.Clear();

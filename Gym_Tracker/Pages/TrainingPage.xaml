@@ -19,10 +19,14 @@
         <CollectionView ItemsSource="{Binding Trainings}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="10" BackgroundColor="#eee" Margin="0,5">
+                    <StackLayout Padding="10" Margin="0,5">
                         <Label Text="{Binding Id}" FontSize="20" />
-                        <Label Text="{Binding Created, StringFormat='Created: {0:MM/dd/yyyy HH:mm}'}" 
-                   FontSize="16" />
+                        <Label Text="{Binding Repetitions}" FontSize="20" />
+                        <Label Text="{Binding Sets}" FontSize="20" />
+                        <!--
+                        <Label Text="{Binding Created, StringFormat='Created: {0:yyyy/MM/dd HH:mm}'}"
+                               FontSize="16" />
+                        -->
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

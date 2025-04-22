@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using GymTracker_Shared_DTOs;
 
 namespace Gym_Tracker.Models
 {

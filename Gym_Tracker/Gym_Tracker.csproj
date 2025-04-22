@@ -57,6 +57,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Models\Exercise.cs" />
+	  <Compile Remove="Models\Training.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="8.0.1" />
 		<PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="3.0.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
