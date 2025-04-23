@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Gym_Tracker.Pages.RegisterPage"
+             xmlns:viewmodel="clr-namespace:Gym_Tracker.ViewModels"
+             x:DataType="viewmodel:RegisterViewModel"
+             Title="RegisterPage">
+
+    <ContentPage.BindingContext>
+        <viewmodel:RegisterViewModel/>
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <Entry Placeholder="First Name" Text="{Binding FirstName}" />
+            <Entry Placeholder="Last Name" Text="{Binding LastName}" />
+            <Entry Placeholder="Email Address" Text="{Binding EmailAddress}" Keyboard="Email" />
+            <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" />
+            <Button Text="Register" Command="{Binding RegisterUserCommand}" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

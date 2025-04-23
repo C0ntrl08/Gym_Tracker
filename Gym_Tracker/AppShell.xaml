@@ -22,6 +22,10 @@
         Title="Premium" Icon="premium_symbol.png"
         ContentTemplate="{DataTemplate pages:PremiumPage}"
         Route="PremiumPage" />
+    <ShellContent
+        Title="Register" Icon="register.png"
+        ContentTemplate="{DataTemplate pages:RegisterPage}"
+        Route="RegisterPage" />
 
     </TabBar>
 
