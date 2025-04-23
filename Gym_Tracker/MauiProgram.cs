@@ -28,6 +28,9 @@ namespace Gym_Tracker
             });
             builder.Services.AddTransient<ExerciseDetailViewModel>();
 
+            builder.Services.AddTransient<IAuthService, AuthService>();
+            builder.Services.AddTransient<LoginViewModel>();
+
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif

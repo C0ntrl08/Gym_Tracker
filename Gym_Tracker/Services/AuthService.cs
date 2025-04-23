@@ -7,26 +7,14 @@ namespace Gym_Tracker.Services
 {
     public class AuthService : IAuthService
     {
-        private const string AuthTokenKey = "auth_token";
-        // Adjust the base URL if needed.
+        private const string AuthTokenKey = "MySuperSecretKeyHereMySuperSecretKeyHereMySuperSecretKeyHereMySuperSecretKeyHere";
         private const string BaseUrl = "https://192.168.0.67:7013/api/auth/";
 
-        private readonly HttpClient _httpClient;
-
-        // Holds the current JWT token in memory.
         private string _token = string.Empty;
-
-        public AuthService(HttpClient httpClient)
-        {
-            _httpClient = httpClient;
-        }
 
         public bool IsAuthenticated => !string.IsNullOrEmpty(_token);
         public string AuthToken => _token;
 
-        /// <summary>
-        /// Initialize by loading a token (if one was saved previously).
-        /// </summary>
         public async Task InitializeAsync()
         {
             _token = await SecureStorage.GetAsync(AuthTokenKey) ?? string.Empty;
@@ -42,18 +30,28 @@ namespace Gym_Tracker.Services
                     Password = password
                 };
 
-                // Call the backend login endpoint.
-                HttpResponseMessage response = await _httpClient.PostAsJsonAsync($"{BaseUrl}login", request);
+                // Create a custom HTTP handler to bypass SSL/TLS validation for debugging.
+                var handler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) => true
+                };
 
+                using var httpClient = new HttpClient(handler)
+                {
+                    BaseAddress = new Uri(BaseUrl)
+                };
+
+                // Send POST request to the login endpoint.
+                HttpResponseMessage response = await httpClient.PostAsJsonAsync("login", request);
                 if (response.IsSuccessStatusCode)
                 {
-                    // In our API, we expect an object like { token: "yourToken" }
                     string resultJson = await response.Content.ReadAsStringAsync();
                     using JsonDocument jsonDoc = JsonDocument.Parse(resultJson);
                     if (jsonDoc.RootElement.TryGetProperty("token", out JsonElement tokenElement))
                     {
                         _token = tokenElement.GetString() ?? string.Empty;
-                        // Save the token securely on the device.
+
+                        // Store the JWT securely.
                         await SecureStorage.SetAsync(AuthTokenKey, _token);
                         return true;
                     }
@@ -61,8 +59,9 @@ namespace Gym_Tracker.Services
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Exception in LoginAsync: {ex}");
+                Debug.WriteLine($"Error in LoginAsync: {ex}");
             }
+
             return false;
         }
 
@@ -78,12 +77,22 @@ namespace Gym_Tracker.Services
                     Password = password
                 };
 
-                HttpResponseMessage response = await _httpClient.PostAsJsonAsync($"{BaseUrl}register", request);
+                var handler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) => true
+                };
+
+                using var httpClient = new HttpClient(handler)
+                {
+                    BaseAddress = new Uri(BaseUrl)
+                };
+
+                HttpResponseMessage response = await httpClient.PostAsJsonAsync("register", request);
                 return response.IsSuccessStatusCode;
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Exception in RegisterAsync: {ex}");
+                Debug.WriteLine($"Error in RegisterAsync: {ex}");
                 return false;
             }
         }

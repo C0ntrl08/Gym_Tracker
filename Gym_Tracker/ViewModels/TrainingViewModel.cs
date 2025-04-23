@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Text.Json;
+using Gym_Tracker.Pages;
 using GymTracker_Shared_DTOs;
 
 namespace Gym_Tracker.ViewModels
@@ -61,6 +62,7 @@ namespace Gym_Tracker.ViewModels
                 // Improved error logging
                 Debug.WriteLine($"Error fetching trainings: {ex}");
             }
+
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
