@@ -4,7 +4,7 @@
              x:Class="Gym_Tracker.Pages.RegisterPage"
              xmlns:viewmodel="clr-namespace:Gym_Tracker.ViewModels"
              x:DataType="viewmodel:RegisterViewModel"
-             Title="RegisterPage">
+             Title="Create an Account">
 
     <ContentPage.BindingContext>
         <viewmodel:RegisterViewModel/>
@@ -16,7 +16,7 @@
             <Entry Placeholder="Last Name" Text="{Binding LastName}" />
             <Entry Placeholder="Email Address" Text="{Binding EmailAddress}" Keyboard="Email" />
             <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" />
-            <Button Text="Register" Command="{Binding RegisterUserCommand}" />
+            <Button Text="Sign up" Command="{Binding RegisterUserCommand}" />
         </VerticalStackLayout>
     </ScrollView>
 

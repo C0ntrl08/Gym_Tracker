@@ -14,7 +14,7 @@
                 <Label Text="Please login to be able to view your trainings"
                        HorizontalOptions="Center"
                        FontSize="Medium" />
-                <Button Text="Go to Loginpage"
+                <Button Text="Go to Login"
                         Command="{Binding NavigateToLoginCommand}"
                         HorizontalOptions="Center" />
             </StackLayout>
