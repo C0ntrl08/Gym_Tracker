@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Text.Json;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -20,8 +22,12 @@ namespace Gym_Tracker.ViewModels
         // Inverse: if not authenticated, we need to prompt for login.
         public bool ShowLoginPrompt => !_authService.IsAuthenticated;
 
+        // Observable property to display the token (optional — provided for testing).
         [ObservableProperty]
         private string authToken = string.Empty;
+
+        // This collection will hold the trainings fetched from the backend.
+        public ObservableCollection<TrainingDto> Trainings { get; } = new ObservableCollection<TrainingDto>();
 
         public TrainingViewModel(IAuthService authService)
         {
@@ -38,6 +44,52 @@ namespace Gym_Tracker.ViewModels
             // Raise property-changed notifications for computed properties.
             OnPropertyChanged(nameof(IsAuthenticated));
             OnPropertyChanged(nameof(ShowLoginPrompt));
+            await LoadTrainingsAsync();
+        }
+
+        // Loads the trainings from the backend for the authenticated user.
+        public async Task LoadTrainingsAsync()
+        {
+            if (!_authService.IsAuthenticated)
+            {
+                Trainings.Clear();
+                return;
+            }
+
+            try
+            {
+                // Create a custom HTTP handler to bypass certificate validation for debugging.
+                var handler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) => true
+                };
+
+                using var client = new HttpClient(handler)
+                {
+                    BaseAddress = new Uri("https://192.168.0.67:7013/api/Training/")
+                };
+
+                // Set the Authorization header with the token.
+                client.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue("Bearer", _authService.AuthToken);
+
+                // Call the GET endpoint to fetch trainings.
+                var trainings = await client.GetFromJsonAsync<List<TrainingDto>>("user");
+
+                // Update the ObservableCollection.
+                Trainings.Clear();
+                if (trainings != null)
+                {
+                    foreach (var training in trainings)
+                    {
+                        Trainings.Add(training);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error loading trainings: " + ex);
+            }
         }
 
         // Command to log out.
@@ -48,6 +100,9 @@ namespace Gym_Tracker.ViewModels
             AuthToken = string.Empty;
             OnPropertyChanged(nameof(IsAuthenticated));
             OnPropertyChanged(nameof(ShowLoginPrompt));
+            Trainings.Clear();
+            // TODO - optionally navigate to the login page
+            // await Shell.Current.GoToAsync(nameof(Pages.LoginPage));
         }
 
         // Command to navigate to Login.

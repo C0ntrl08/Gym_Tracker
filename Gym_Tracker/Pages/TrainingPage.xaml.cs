@@ -3,19 +3,20 @@ namespace Gym_Tracker.Pages;
 
 public partial class TrainingPage : ContentPage
 {
-	public TrainingPage()
-	{
-		InitializeComponent();
+    public TrainingPage()
+    {
+        InitializeComponent();
+        // Retrieve the TrainingViewModel from DI.
         BindingContext = Application.Current?.Handler?.MauiContext?.Services
-                             .GetRequiredService<TrainingViewModel>();
+                         .GetRequiredService<TrainingViewModel>();
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        if (BindingContext is TrainingViewModel vm)
+        if (BindingContext is TrainingViewModel viewModel)
         {
-            await vm.RefreshStatusAsync();
+            await viewModel.RefreshStatusAsync();
         }
     }
 

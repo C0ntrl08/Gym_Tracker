@@ -3,12 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Gym_Tracker.Pages.TrainingPage"
              xmlns:viewmodel="clr-namespace:Gym_Tracker.ViewModels"
+             xmlns:models="clr-namespace:GymTracker_Shared_DTOs;assembly=GymTracker-Shared-DTOs"
              x:DataType="viewmodel:TrainingViewModel"
              Title="Trainings">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20">
-            <!-- Section shown when NOT authenticated -->
+            <!-- Section when NOT authenticated -->
             <StackLayout IsVisible="{Binding ShowLoginPrompt}">
                 <Label Text="Please login to be able to view your trainings"
                        HorizontalOptions="Center"
@@ -18,18 +19,32 @@
                         HorizontalOptions="Center" />
             </StackLayout>
 
-            <!-- Section shown when the user IS authenticated -->
+            <!-- Section when the user IS authenticated -->
             <StackLayout IsVisible="{Binding IsAuthenticated}">
-                <Label Text="Welcome, you are logged in!"
+                <Label Text="Your Trainings:" 
                        HorizontalOptions="Center"
                        FontAttributes="Bold" 
                        FontSize="Large" />
-                <Label Text="Your token:" 
-                       HorizontalOptions="Center"
-                       FontAttributes="Bold" />
-                <Label Text="{Binding AuthToken}"
-                       HorizontalOptions="Center"
-                       TextColor="DarkGray" />
+
+                <!-- A CollectionView to display the trainings -->
+                <CollectionView ItemsSource="{Binding Trainings}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:TrainingDto">
+                            <Frame Padding="10" Margin="5" BorderColor="LightGray" CornerRadius="5">
+                                <VerticalStackLayout>
+                                    <!-- Display creation date -->
+                                    <Label Text="{Binding Created, StringFormat='Created: {0:d}'}" />
+                                    <!-- 
+                                      Assuming that your TrainingDto has a property called 'Exercises' as a list,
+                                      display the count of exercises. Adjust the binding if your property name is different.
+                                    -->
+                                    <Label Text="{Binding Exercises.Count, StringFormat='Exercises: {0}'}" />
+                                </VerticalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
                 <Button Text="Logout"
                         Command="{Binding LogoutCommand}"
                         HorizontalOptions="Center" />
