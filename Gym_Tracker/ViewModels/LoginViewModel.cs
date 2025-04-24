@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using Gym_Tracker.Services;
 using System.Diagnostics;
-using System.Net.Mail;
 
 namespace Gym_Tracker.ViewModels
 {

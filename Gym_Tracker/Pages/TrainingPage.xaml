@@ -2,16 +2,29 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Gym_Tracker.Pages.TrainingPage"
+             xmlns:viewmodel="clr-namespace:Gym_Tracker.ViewModels"
+             x:DataType="viewmodel:TrainingViewModel"
              Title="Trainings">
 
     <ScrollView>
-        <Button 
-    Text="Go to Login"
-    Clicked="OnLoginClicked"
-    HorizontalOptions="Center"
-    VerticalOptions="Center"/>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <!-- Display the token -->
+            <Label Text="Your Token:" FontAttributes="Bold" />
+            <Label Text="{Binding AuthToken}" TextColor="DarkGray" />
 
+            <!-- Navigate to Login -->
+            <Button 
+                Text="Go to Login"
+                Command="{Binding NavigateToLoginCommand}"
+                HorizontalOptions="Center" />
+
+            <!-- Logout Button -->
+            <Button 
+                Text="Logout"
+                Command="{Binding LogoutCommand}"
+                HorizontalOptions="Center" />
+        </VerticalStackLayout>
     </ScrollView>
-    
+
         
 </ContentPage>

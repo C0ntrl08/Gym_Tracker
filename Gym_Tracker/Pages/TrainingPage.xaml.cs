@@ -1,3 +1,4 @@
+using Gym_Tracker.ViewModels;
 namespace Gym_Tracker.Pages;
 
 public partial class TrainingPage : ContentPage
@@ -5,10 +6,17 @@ public partial class TrainingPage : ContentPage
 	public TrainingPage()
 	{
 		InitializeComponent();
-	}
-
-    private async void OnLoginClicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync(nameof(LoginPage));
+        BindingContext = Application.Current?.Handler?.MauiContext?.Services
+                             .GetRequiredService<TrainingViewModel>();
     }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        if (BindingContext is TrainingViewModel viewModel)
+        {
+            await viewModel.RefreshTokenAsync();
+        }
+    }
+
 }
