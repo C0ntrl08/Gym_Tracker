@@ -26,6 +26,12 @@
                        FontAttributes="Bold" 
                        FontSize="Large" />
 
+                <!-- Message for no trainings -->
+                <Label Text="There are no current trainingsessions. Please create a new one!"
+                       IsVisible="{Binding ShowNoTrainingsMessage}"
+                       HorizontalOptions="Center"
+                       TextColor="DarkGray" />
+
                 <!-- A CollectionView to display the trainings -->
                 <CollectionView ItemsSource="{Binding Trainings}">
                     <CollectionView.ItemTemplate>

@@ -22,6 +22,9 @@ namespace Gym_Tracker.ViewModels
         // Inverse: if not authenticated, we need to prompt for login.
         public bool ShowLoginPrompt => !_authService.IsAuthenticated;
 
+        // New computed property: true when there are no trainings but the user is authenticated.
+        public bool ShowNoTrainingsMessage => IsAuthenticated && Trainings.Count == 0;
+
         // Observable property to display the token (optional — provided for testing).
         [ObservableProperty]
         private string authToken = string.Empty;
@@ -85,6 +88,9 @@ namespace Gym_Tracker.ViewModels
                         Trainings.Add(training);
                     }
                 }
+
+                // Notify the UI to show/hide the no trainings message.
+                OnPropertyChanged(nameof(ShowNoTrainingsMessage));
             }
             catch (Exception ex)
             {
@@ -111,6 +117,8 @@ namespace Gym_Tracker.ViewModels
         {
             await Shell.Current.GoToAsync(nameof(LoginPage));
         }
+    }
+}
 
 
         // Updating the TrainingPage.xaml
@@ -175,5 +183,3 @@ namespace Gym_Tracker.ViewModels
         //{
         //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         //}
-    }
-}
