@@ -9,6 +9,9 @@
   <ItemGroup>
     <Compile Remove="DataTransferObjects\LoginRequest.cs" />
     <Compile Remove="DataTransferObjects\RegisterRequest.cs" />
+    <Compile Remove="Models\Exercise.cs" />
+    <Compile Remove="Models\Training.cs" />
+    <Compile Remove="Models\TrainingExercise.cs" />
   </ItemGroup>
 
   <ItemGroup>
