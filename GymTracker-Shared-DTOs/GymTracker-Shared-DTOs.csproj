@@ -7,9 +7,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="TrainingDto.cs" />
-    <Compile Remove="TrainingExerciseDto.cs" />
-  </ItemGroup>
-
 </Project>

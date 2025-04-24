@@ -8,23 +8,34 @@
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20">
-            <!-- Display the token -->
-            <Label Text="Your Token:" FontAttributes="Bold" />
-            <Label Text="{Binding AuthToken}" TextColor="DarkGray" />
+            <!-- Section shown when NOT authenticated -->
+            <StackLayout IsVisible="{Binding ShowLoginPrompt}">
+                <Label Text="Please login to be able to view your trainings"
+                       HorizontalOptions="Center"
+                       FontSize="Medium" />
+                <Button Text="Go to Loginpage"
+                        Command="{Binding NavigateToLoginCommand}"
+                        HorizontalOptions="Center" />
+            </StackLayout>
 
-            <!-- Navigate to Login -->
-            <Button 
-                Text="Go to Login"
-                Command="{Binding NavigateToLoginCommand}"
-                HorizontalOptions="Center" />
-
-            <!-- Logout Button -->
-            <Button 
-                Text="Logout"
-                Command="{Binding LogoutCommand}"
-                HorizontalOptions="Center" />
+            <!-- Section shown when the user IS authenticated -->
+            <StackLayout IsVisible="{Binding IsAuthenticated}">
+                <Label Text="Welcome, you are logged in!"
+                       HorizontalOptions="Center"
+                       FontAttributes="Bold" 
+                       FontSize="Large" />
+                <Label Text="Your token:" 
+                       HorizontalOptions="Center"
+                       FontAttributes="Bold" />
+                <Label Text="{Binding AuthToken}"
+                       HorizontalOptions="Center"
+                       TextColor="DarkGray" />
+                <Button Text="Logout"
+                        Command="{Binding LogoutCommand}"
+                        HorizontalOptions="Center" />
+            </StackLayout>
         </VerticalStackLayout>
     </ScrollView>
 
-        
+
 </ContentPage>

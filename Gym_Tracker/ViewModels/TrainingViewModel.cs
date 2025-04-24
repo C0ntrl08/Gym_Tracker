@@ -14,6 +14,12 @@ namespace Gym_Tracker.ViewModels
     {
         private readonly IAuthService _authService;
 
+        // Computed property: true if authenticated.
+        public bool IsAuthenticated => _authService.IsAuthenticated;
+
+        // Inverse: if not authenticated, we need to prompt for login.
+        public bool ShowLoginPrompt => !_authService.IsAuthenticated;
+
         [ObservableProperty]
         private string authToken = string.Empty;
 
@@ -21,24 +27,27 @@ namespace Gym_Tracker.ViewModels
         {
             _authService = authService;
 
-            Task.Run(async () => await RefreshTokenAsync());
+            Task.Run(async () => await RefreshStatusAsync());
         }
 
-        public async Task RefreshTokenAsync()
+        // Refresh the authentication status and update token.
+        public async Task RefreshStatusAsync()
         {
-            // Reinitialize the AuthService, which loads token from SecureStorage.
             await _authService.InitializeAsync();
             AuthToken = _authService.AuthToken;
+            // Raise property-changed notifications for computed properties.
+            OnPropertyChanged(nameof(IsAuthenticated));
+            OnPropertyChanged(nameof(ShowLoginPrompt));
         }
 
         // Command to log out.
         [RelayCommand]
         public async Task LogoutAsync()
         {
-            // Clear the token and navigate back to the login page.
             await _authService.LogoutAsync();
-            AuthToken = string.Empty; // Clear the displayed token.
-            await Shell.Current.GoToAsync(nameof(LoginPage));
+            AuthToken = string.Empty;
+            OnPropertyChanged(nameof(IsAuthenticated));
+            OnPropertyChanged(nameof(ShowLoginPrompt));
         }
 
         // Command to navigate to Login.

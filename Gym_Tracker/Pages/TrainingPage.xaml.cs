@@ -13,9 +13,9 @@ public partial class TrainingPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        if (BindingContext is TrainingViewModel viewModel)
+        if (BindingContext is TrainingViewModel vm)
         {
-            await viewModel.RefreshTokenAsync();
+            await vm.RefreshStatusAsync();
         }
     }
 

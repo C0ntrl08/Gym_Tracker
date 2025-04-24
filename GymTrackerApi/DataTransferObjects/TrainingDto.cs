@@ -1,6 +1,6 @@
 ﻿namespace GymTrackerApi.DataTransferObjects
 {
-    public class TrainingDto
+    public class TrainingDto2
     {
         public int Id { get; set; }
         public DateTime Created { get; set; }
