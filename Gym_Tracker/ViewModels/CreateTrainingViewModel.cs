@@ -17,36 +17,42 @@ namespace Gym_Tracker.ViewModels
         {
             _authService = authService;
 
-            // Configure the HttpClient—if you need to bypass certificate errors during development.
+            // Configure HttpClient with handler that bypasses certificate errors during development.
             var handler = new HttpClientHandler
             {
-                ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
+                ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) => true
             };
             _httpClient = new HttpClient(handler)
             {
                 BaseAddress = new Uri("https://192.168.0.67:7013/api/Training/")
             };
 
-            // Load the list of available exercises.
+            // Load available exercises (for example, statically here).
             LoadExercises();
+
+            // Initialize our collection for added exercises.
+            AddedExercises = new ObservableCollection<TrainingExerciseDto>();
         }
 
-        // Collection for the exercise dropdown (assume Exercise is defined in your shared DTOs)
+        // List of exercises for the Picker.
         public ObservableCollection<Exercise> Exercises { get; } = new ObservableCollection<Exercise>();
 
         private void LoadExercises()
         {
-            // For demonstration, using static data.
-            // In a real app, you might fetch this list from a backend API.
+            // In a real application, you might fetch these from an API.
             Exercises.Add(new Exercise { Id = 1, Name = "Squat" });
             Exercises.Add(new Exercise { Id = 2, Name = "Bench Press" });
             Exercises.Add(new Exercise { Id = 3, Name = "Deadlift" });
         }
 
-        // Properties for the chosen exercise and input fields.
+        // This collection keeps all the added exercises.
+        public ObservableCollection<TrainingExerciseDto> AddedExercises { get; }
+
+        // Input properties for the current exercise entry.
         [ObservableProperty]
         private Exercise? selectedExercise;
 
+        // We use string properties for simplicity, and then parse them when adding.
         [ObservableProperty]
         private string sets = string.Empty;
 
@@ -59,54 +65,74 @@ namespace Gym_Tracker.ViewModels
         [ObservableProperty]
         private string durationMinutes = string.Empty;
 
-        // Command to save the new training.
+        // Command for the "Add Exercise" button.
         [RelayCommand]
-        public async Task SaveTrainingAsync()
+        public void AddExercise()
         {
             if (SelectedExercise == null)
             {
-                await Shell.Current.DisplayAlert("Error", "Please select an exercise", "OK");
+                Shell.Current.DisplayAlert("Error", "Please select an exercise", "OK");
                 return;
             }
 
-            // Validate and parse the numeric inputs.
             if (!int.TryParse(Sets, out int parsedSets) ||
-                !int.TryParse(Repetitions, out int parsedRepetitions) ||
+                !int.TryParse(Repetitions, out int parsedReps) ||
                 !float.TryParse(Weight, out float parsedWeight) ||
                 !int.TryParse(DurationMinutes, out int parsedDuration))
             {
-                await Shell.Current.DisplayAlert("Error", "Please make sure all values are correctly entered.", "OK");
+                Shell.Current.DisplayAlert("Error", "Please enter valid numeric values for all fields.", "OK");
                 return;
             }
 
-            // Build the SaveTrainingRequest object. Note: If you moved this DTO to the shared library, use that version.
+            // Create a new training exercise entry.
+            var trainingExercise = new TrainingExerciseDto
+            {
+                ExerciseId = SelectedExercise.Id,
+                Sets = parsedSets,
+                Repetitions = parsedReps,
+                Weight = parsedWeight,
+                DurationMinutes = parsedDuration
+                // Optionally, if you have an ExerciseName in your DTO, you can set it here.
+                // ExerciseName = SelectedExercise.Name
+            };
+
+            // Add it to the collection.
+            AddedExercises.Add(trainingExercise);
+
+            // Clear inputs so the user can add another exercise.
+            SelectedExercise = null;
+            Sets = "";
+            Repetitions = "";
+            Weight = "";
+            DurationMinutes = "";
+
+            Shell.Current.DisplayAlert("Added", "Exercise added to training", "OK");
+        }
+
+        // Command for saving the complete training.
+        [RelayCommand]
+        public async Task SaveTrainingAsync()
+        {
+            if (AddedExercises.Count == 0)
+            {
+                await Shell.Current.DisplayAlert("Error", "Please add at least one exercise.", "OK");
+                return;
+            }
+
             var request = new SaveTrainingRequest
             {
-                Exercises = new List<TrainingExerciseDto>
-                {
-                    new TrainingExerciseDto
-                    {
-                        ExerciseId = SelectedExercise.Id,
-                        Sets = parsedSets,
-                        Repetitions = parsedRepetitions,
-                        Weight = parsedWeight,
-                        DurationMinutes = parsedDuration
-                    }
-                }
+                Exercises = AddedExercises.ToList()
             };
 
             try
             {
-                // Set the Authorization header using the token from the authentication service.
                 _httpClient.DefaultRequestHeaders.Authorization =
                     new AuthenticationHeaderValue("Bearer", _authService.AuthToken);
 
-                // Post the training to the backend.
                 var response = await _httpClient.PostAsJsonAsync("save", request);
                 if (response.IsSuccessStatusCode)
                 {
                     await Shell.Current.DisplayAlert("Success", "Training created successfully", "OK");
-                    // Navigate back to the Trainings page.
                     await Shell.Current.GoToAsync("..");
                 }
                 else
