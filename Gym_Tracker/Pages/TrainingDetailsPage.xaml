@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:Gym_Tracker.ViewModels"
+             xmlns:models="clr-namespace:GymTracker_Shared_DTOs;assembly=GymTracker-Shared-DTOs"
+             x:Class="Gym_Tracker.Pages.TrainingDetailsPage"
+             x:DataType="viewmodel:TrainingDetailsViewModel"
+             Title="Training Details">
+    <ContentPage.Content>
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="10">
+                <!-- Display creation date -->
+                <Label Text="{Binding Training.Created, StringFormat='Training Created: {0:d}'}" 
+                       FontAttributes="Bold" FontSize="Large"/>
+
+                <!-- List of training exercises -->
+                <CollectionView ItemsSource="{Binding Training.Exercises}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:TrainingExerciseDto">
+                            <Frame Padding="10" Margin="5" BorderColor="LightGray" CornerRadius="5">
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding ExerciseId, StringFormat='Exercise Id: {0}'}" />
+                                    <Label Text="{Binding Sets, StringFormat='Sets: {0}'}" />
+                                    <Label Text="{Binding Repetitions, StringFormat='Repetitions: {0}'}" />
+                                    <Label Text="{Binding Weight, StringFormat='Weight: {0}'}" />
+                                    <Label Text="{Binding DurationMinutes, StringFormat='Duration: {0} minutes'}" />
+                                </VerticalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Close button for the modal -->
+                <Button Text="Close" Command="{Binding CloseCommand}" HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+
+
+</ContentPage>

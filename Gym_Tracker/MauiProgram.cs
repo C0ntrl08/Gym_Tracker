@@ -26,7 +26,9 @@ namespace Gym_Tracker
                 // While AuthService uses its own BaseUrl constant, you could alternatively configure it here.
                 // client.BaseAddress = new Uri("https://192.168.0.67:7013/");
             });
+
             builder.Services.AddTransient<ExerciseDetailViewModel>();
+            builder.Services.AddTransient<TrainingDetailsViewModel>();
             builder.Services.AddTransient<TrainingViewModel>();
             builder.Services.AddTransient<IAuthService, AuthService>();
             builder.Services.AddTransient<LoginViewModel>();

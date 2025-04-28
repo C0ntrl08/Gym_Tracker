@@ -5,6 +5,7 @@
              xmlns:viewmodel="clr-namespace:Gym_Tracker.ViewModels"
              xmlns:models="clr-namespace:GymTracker_Shared_DTOs;assembly=GymTracker-Shared-DTOs"
              x:DataType="viewmodel:TrainingViewModel"
+             x:Name="PageTraining"
              Title="Trainings">
 
     <ScrollView>
@@ -37,13 +38,14 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:TrainingDto">
                             <Frame Padding="10" Margin="5" BorderColor="LightGray" CornerRadius="5">
+                                <!-- Attach a tap gesture to the Frame -->
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="2"
+                                        Command="{Binding Source={x:Reference PageTraining}, Path=BindingContext.ShowTrainingDetailsCommand}"
+                                        CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
                                 <VerticalStackLayout>
-                                    <!-- Display creation date -->
                                     <Label Text="{Binding Created, StringFormat='Created: {0:d}'}" />
-                                    <!-- 
-                                      Assuming that your TrainingDto has a property called 'Exercises' as a list,
-                                      display the count of exercises. Adjust the binding if your property name is different.
-                                    -->
                                     <Label Text="{Binding Exercises.Count, StringFormat='Exercises: {0}'}" />
                                 </VerticalStackLayout>
                             </Frame>
