@@ -18,8 +18,8 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:TrainingExerciseDto">
                             <Frame Padding="10" Margin="5" BorderColor="LightGray" CornerRadius="5">
-                                <VerticalStackLayout>
-                                    <Label Text="{Binding ExerciseId, StringFormat='Exercise Id: {0}'}" />
+                                <VerticalStackLayout Padding="10">
+                                    <Label Text="{Binding ExerciseName, StringFormat='Exercise: {0}'}" />
                                     <Label Text="{Binding Sets, StringFormat='Sets: {0}'}" />
                                     <Label Text="{Binding Repetitions, StringFormat='Repetitions: {0}'}" />
                                     <Label Text="{Binding Weight, StringFormat='Weight: {0}'}" />

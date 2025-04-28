@@ -67,6 +67,7 @@ namespace GymTrackerApi.Controllers
                 Exercises = t.TrainingExercises.Select(te => new TrainingExerciseDto
                 {
                     ExerciseId = te.ExerciseId,
+                    ExerciseName = te.Exercise != null ? te.Exercise.Name : "Unknown",
                     Sets = te.Sets,
                     Repetitions = te.Repetitions,
                     Weight = te.Weight,
