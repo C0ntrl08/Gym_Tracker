@@ -7,13 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\WeatherForecastController.cs" />
     <Compile Remove="DataTransferObjects\LoginRequest.cs" />
     <Compile Remove="DataTransferObjects\RegisterRequest.cs" />
+    <Compile Remove="DataTransferObjects\SaveTrainingRequest.cs" />
     <Compile Remove="DataTransferObjects\TrainingDto.cs" />
     <Compile Remove="DataTransferObjects\TrainingExerciseDto.cs" />
     <Compile Remove="Models\Exercise.cs" />
     <Compile Remove="Models\Training.cs" />
     <Compile Remove="Models\TrainingExercise.cs" />
+    <Compile Remove="WeatherForecast.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +32,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GymTracker-Shared-DTOs\GymTracker-Shared-DTOs.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DataTransferObjects\" />
   </ItemGroup>
 
 </Project>

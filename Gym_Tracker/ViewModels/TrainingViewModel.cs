@@ -69,7 +69,7 @@ namespace Gym_Tracker.ViewModels
 
                 using var client = new HttpClient(handler)
                 {
-                    BaseAddress = new Uri("https://192.168.0.67:7013/api/Training/")
+                    BaseAddress = new Uri($"{AppConfig.BaseApiUrl}api/Training/")
                 };
 
                 // Set the Authorization header with the token.

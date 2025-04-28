@@ -22,9 +22,10 @@ namespace Gym_Tracker.ViewModels
             {
                 ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) => true
             };
+
             _httpClient = new HttpClient(handler)
             {
-                BaseAddress = new Uri("https://192.168.0.67:7013/api/Training/")
+                BaseAddress = new Uri($"{AppConfig.BaseApiUrl}api/Training/")
             };
 
             // Load available exercises (for example, statically here).

@@ -48,7 +48,7 @@ namespace Gym_Tracker.ViewModels
             using HttpClient client = new HttpClient(handler)
             {
                 // Adjust the BaseAddress to match your backend's URL.
-                BaseAddress = new Uri("https://192.168.0.67:7013/")
+                BaseAddress = new Uri(AppConfig.BaseApiUrl)
             };
 
             // Serialize the DTO to JSON.

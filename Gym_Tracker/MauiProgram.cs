@@ -2,7 +2,6 @@
 using Gym_Tracker.ViewModels;
 using Microsoft.Extensions.Logging;
 using Gym_Tracker.Services;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Gym_Tracker
 {
