@@ -15,10 +15,13 @@
 
                 <!-- List of training exercises -->
                 <CollectionView ItemsSource="{Binding Training.Exercises}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:TrainingExerciseDto">
                             <Frame Padding="10" Margin="5" BorderColor="LightGray" CornerRadius="5">
-                                <VerticalStackLayout Padding="10">
+                                <VerticalStackLayout>
                                     <Label Text="{Binding ExerciseName, StringFormat='Exercise: {0}'}" />
                                     <Label Text="{Binding Sets, StringFormat='Sets: {0}'}" />
                                     <Label Text="{Binding Repetitions, StringFormat='Repetitions: {0}'}" />

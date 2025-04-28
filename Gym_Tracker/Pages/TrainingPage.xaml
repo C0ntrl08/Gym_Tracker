@@ -35,6 +35,9 @@
 
                 <!-- A CollectionView to display the trainings -->
                 <CollectionView ItemsSource="{Binding Trainings}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:TrainingDto">
                             <Frame Padding="10" Margin="5" BorderColor="LightGray" CornerRadius="5">

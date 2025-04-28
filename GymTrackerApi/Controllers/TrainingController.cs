@@ -55,8 +55,9 @@ namespace GymTrackerApi.Controllers
             // Retrieve trainings for the authenticated user, including exercise details.
             var trainings = await _context.Trainings
                 .Include(t => t.TrainingExercises)
-                    .ThenInclude(te => te.Exercise)
+                .ThenInclude(te => te.Exercise)
                 .Where(t => t.ApplicationUserId == userId)
+                .OrderByDescending(t => t.Created)
                 .ToListAsync();
 
             // Map the entity data to TrainingDto.
