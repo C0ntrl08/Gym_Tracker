@@ -10,6 +10,7 @@ namespace Gym_Tracker
             Routing.RegisterRoute(nameof(ExerciseDetailPage), typeof(ExerciseDetailPage));
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
             Routing.RegisterRoute(nameof(TrainingDetailsPage), typeof(TrainingDetailsPage));
+            Routing.RegisterRoute(nameof(CreateTrainingPage), typeof(CreateTrainingPage));
         }
     }
 }

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:Gym_Tracker.ViewModels"
+             xmlns:models="clr-namespace:GymTracker_Shared_DTOs;assembly=GymTracker-Shared-DTOs"
+             x:Class="Gym_Tracker.Pages.CreateTrainingPage"
+             x:DataType="viewmodel:CreateTrainingViewModel"
+             Title="Create Training">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <!-- Picker for selecting an exercise -->
+            <Label Text="Select Exercise:" />
+            <Picker ItemsSource="{Binding Exercises}"
+                  ItemDisplayBinding="{Binding Name}"
+                  SelectedItem="{Binding SelectedExercise}" />
+
+            <!-- Input for Sets -->
+            <Label Text="Sets:" />
+            <Entry Text="{Binding Sets}" 
+                 Keyboard="Numeric" 
+                 Placeholder="Enter number of sets" />
+
+            <!-- Input for Repetitions -->
+            <Label Text="Repetitions:" />
+            <Entry Text="{Binding Repetitions}"
+                 Keyboard="Numeric" 
+                 Placeholder="Enter number of repetitions" />
+
+            <!-- Input for Weight -->
+            <Label Text="Weight:" />
+            <Entry Text="{Binding Weight}" 
+                 Keyboard="Numeric" 
+                 Placeholder="Enter weight (e.g., 75.5)" />
+
+            <!-- Input for Duration Minutes -->
+            <Label Text="Duration (minutes):" />
+            <Entry Text="{Binding DurationMinutes}" 
+                 Keyboard="Numeric" 
+                 Placeholder="Enter duration in minutes" />
+
+            <!-- Button to save the training -->
+            <Button Text="Save Training" 
+                  Command="{Binding SaveTrainingCommand}" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

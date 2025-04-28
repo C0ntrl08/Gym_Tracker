@@ -28,10 +28,18 @@
                        FontSize="Large" />
 
                 <!-- Message for no trainings -->
-                <Label Text="There are no current trainingsessions. Please create a new one!"
+                <Label Text="There are no current training sessions. Please create a new one!"
                        IsVisible="{Binding ShowNoTrainingsMessage}"
                        HorizontalOptions="Center"
                        TextColor="DarkGray" />
+
+                <!-- Horizontal layout for buttons -->
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="15">
+                    <Button Text="Create"
+                  Command="{Binding NavigateToCreateTrainingCommand}" />
+                    <Button Text="Logout"
+                  Command="{Binding LogoutCommand}" />
+                </HorizontalStackLayout>
 
                 <!-- A CollectionView to display the trainings -->
                 <CollectionView ItemsSource="{Binding Trainings}">
@@ -56,9 +64,7 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
-                <Button Text="Logout"
-                        Command="{Binding LogoutCommand}"
-                        HorizontalOptions="Center" />
+                
             </StackLayout>
         </VerticalStackLayout>
     </ScrollView>

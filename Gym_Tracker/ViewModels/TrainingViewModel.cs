@@ -124,6 +124,14 @@ namespace Gym_Tracker.ViewModels
             await Shell.Current.GoToAsync($"{nameof(TrainingDetailsPage)}?trainingJson={Uri.EscapeDataString(trainingJson)}");
         }
 
+        [RelayCommand]
+        public async Task NavigateToCreateTrainingAsync()
+        {
+            // Navigate modally to the CreateTrainingPage.
+            await Shell.Current.GoToAsync(nameof(CreateTrainingPage), true);
+        }
+
+
         // Command to navigate to Login.
         [RelayCommand]
         public async Task NavigateToLoginAsync()
