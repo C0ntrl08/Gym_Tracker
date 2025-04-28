@@ -29,7 +29,7 @@ namespace Gym_Tracker.ViewModels
             };
 
             // Load available exercises (for example, statically here).
-            LoadExercises();
+            Task.Run(async () => await LoadExercisesAsync());
 
             // Initialize our collection for added exercises.
             AddedExercises = new ObservableCollection<TrainingExerciseDto>();
@@ -38,13 +38,46 @@ namespace Gym_Tracker.ViewModels
         // List of exercises for the Picker.
         public ObservableCollection<Exercise> Exercises { get; } = new ObservableCollection<Exercise>();
 
-        private void LoadExercises()
+        private async Task LoadExercisesAsync()
         {
-            // In a real application, you might fetch these from an API.
-            Exercises.Add(new Exercise { Id = 1, Name = "Squat" });
-            Exercises.Add(new Exercise { Id = 2, Name = "Bench Press" });
-            Exercises.Add(new Exercise { Id = 3, Name = "Deadlift" });
+            try
+            {
+                // Create a new HttpClient instance specifically for fetching exercises.
+                var handler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) => true
+                };
+
+                using var client = new HttpClient(handler)
+                {
+                    // Append the appropriate endpoint for exercises.
+                    BaseAddress = new Uri($"{AppConfig.BaseApiUrl}api/Exercises/")
+                };
+
+                // Optionally, if your exercises endpoint requires authentication:
+                client.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue("Bearer", _authService.AuthToken);
+
+                // Fetch the list of exercises from the backend.
+                var exercises = await client.GetFromJsonAsync<List<Exercise>>("");
+                if (exercises != null)
+                {
+                    // Clear any existing items.
+                    Exercises.Clear();
+                    // Add each fetched exercise to the observable collection.
+                    foreach (var exercise in exercises)
+                    {
+                        Exercises.Add(exercise);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Optionally, show an alert if there is an error.
+                await Shell.Current.DisplayAlert("Error", $"Failed to load exercises: {ex.Message}", "OK");
+            }
         }
+
 
         // This collection keeps all the added exercises.
         public ObservableCollection<TrainingExerciseDto> AddedExercises { get; }
