@@ -8,8 +8,8 @@
 
 ## Features
 
-- **User Authentication**  
-  Users can register, log in, and receive a JWT bearer token for secure API access.
+- **Role-Based User Authentication**  
+  Users can register, log in, and receive a JWT bearer token for secure API access. For Admins, a role based authentication has been implemented.
 
 - **View Trainings**  
   Once logged in, users can view a list of their training sessions, sorted with the newest on top.
@@ -51,10 +51,11 @@ The solution is composed of three projects:
 
 ## Prerequisites
 
-- [.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) - available download from the link
 - [Visual Studio 2022](https://visualstudio.microsoft.com/) (or later)
   - With MAUI and ASP.NET workloads installed
+- [.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) - available download from the link
 - [Microsoft OpenJDK 17](https://learn.microsoft.com/en-gb/java/openjdk/download#openjdk-17)
+- [MySQL - Workbench and Server](https://dev.mysql.com/downloads/installer/)
 - If you want to test the code/application on a virtual/physical smartphone you will need some extra configuration as well - [HowTo](https://learn.microsoft.com/en-us/dotnet/maui/android/device/setup?view=net-maui-8.0)
 - A valid SSL certificate for local development (certificate validation is bypassed during development)
 - Git (optional)
@@ -65,10 +66,10 @@ The solution is composed of three projects:
 
 ### Clone the Repository
 
-- git clone ```https://github.com/yourusername/GymTrackerApp.git```
+- git clone ```https://github.com/C0ntrl08/Gym_Tracker.git```
 - cd GymTrackerApp
 
-### Setup the Backend
+### Setup the Backend - GymTrackerApi
 - Open the solution in Visual Studio
 - Update the connnection string in **appsettings.json** (if needed)
 - Run Entity Framework migrations to set up the database:
@@ -77,7 +78,7 @@ dotnet ef database update --project GymTrackerApi
 ```
 - Run the ASP.NET Web API project.
 
-### Setup the Frontend
+### Setup the Frontend - Gym_Tracker
 
 - Open the MAUI project (Gym_Tracker) in Visual Studio
 - Ensure the Base API URL is set correctly in the shared configuration (GymTracker_Shared_DTOs and in the Frontend AuthService Class) and in the **appsettings.json** as well
