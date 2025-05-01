@@ -59,6 +59,19 @@
 	<ItemGroup>
 	  <Compile Remove="Models\Exercise.cs" />
 	  <Compile Remove="Models\Training.cs" />
+	  <Compile Remove="Pages\AdminPanelPage.xaml.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Remove="Resources\Images\admin_icon.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Remove="Pages\AdminPanelPage.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\Images\admin_icon.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -69,6 +82,7 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.1.2" />
 	</ItemGroup>
 
 	<ItemGroup>
