@@ -39,7 +39,7 @@
                         <td>@exercise.Category</td>
                         <td>
                             <a asp-page="EditExercise" asp-route-id="@exercise.Id" class="btn btn-warning">Edit</a>
-                            <a asp-page="DeleteExercise" asp-route-id="@exercise.Id" class="btn btn-danger">Delete</a>
+                            <button type="button" class="btn btn-danger delete-exercise" data-id="@exercise.Id">Delete</button>
                         </td>
                     </tr>
                 }
@@ -49,5 +49,43 @@
     <div>
         <a asp-page="AdminPanel" class="btn btn-primary">Back to Admin Panel</a>
     </div>
+
+    <!-- We inject the JWT token from the session so the AJAX call can include it in the Authorization header. -->
+    <script>
+        var jwtToken = '@HttpContext.Session.GetString("JwtToken")';
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const deleteButtons = document.querySelectorAll('.delete-exercise');
+            deleteButtons.forEach(function (button) {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const exerciseId = button.getAttribute('data-id');
+                    // Show a confirmation popup.
+                    if (confirm('Are you sure you want to delete this exercise?')) {
+                        // Call the DELETE endpoint.
+                        fetch('/api/exercises/' + exerciseId, {
+                            method: 'DELETE',
+                            headers: {
+                                'Authorization': 'Bearer ' + jwtToken,
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                        .then(function (response) {
+                            if (response.ok) {
+                                // Successfully deleted on the server; reload the page.
+                                location.reload();
+                            } else {
+                                alert('Error deleting exercise.');
+                            }
+                        })
+                        .catch(function (error) {
+                            console.error('Fetch error:', error);
+                        });
+                    }
+                    // If the admin clicks "Cancel", no action is taken.
+                });
+            });
+        });
+    </script>
 </body>
 </html>
