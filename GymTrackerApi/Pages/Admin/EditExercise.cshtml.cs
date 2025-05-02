@@ -52,7 +52,7 @@ namespace GymTrackerApi.Pages.Admin
             }
             else
             {
-                // Optionally, you can show an error message.
+                // Optional - show an error message
                 return RedirectToPage("ManageExercises");
             }
         }
@@ -88,7 +88,7 @@ namespace GymTrackerApi.Pages.Admin
             var response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
-                // Instead of redirecting immediately, set a flag and a success message.
+                // Instead of redirecting immediately, setting a flag and a success message.
                 UpdateSucceeded = true;
                 SuccessMessage = "Exercise updated successfully!";
                 return Page();

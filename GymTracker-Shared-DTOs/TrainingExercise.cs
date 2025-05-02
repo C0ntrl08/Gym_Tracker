@@ -5,7 +5,6 @@
         public int Id { get; set; }
         public int TrainingId { get; set; }
         public int ExerciseId { get; set; }
-
         public int Sets { get; set; }
         public int Repetitions { get; set; }
         public float? Weight { get; set; }

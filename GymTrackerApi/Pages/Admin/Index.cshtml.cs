@@ -1,5 +1,3 @@
-using System.Text.Json;
-
 namespace GymTrackerApi.Pages.Admin
 {
     public class IndexModel : PageModel

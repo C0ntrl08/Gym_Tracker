@@ -1,6 +1,4 @@
-﻿using GymTrackerApi.Models;
-
-namespace GymTrackerApi.DataContexts
+﻿namespace GymTrackerApi.DataContexts
 {
     public class ApplicationDbContext : DbContext
     {

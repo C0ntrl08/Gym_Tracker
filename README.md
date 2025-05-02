@@ -39,6 +39,8 @@ The solution is composed of three projects:
    - ASP.NET Web API that handles authentication, training creation, and data retrieval  
    - Uses Entity Framework Core for data access
    - Uses a nuget Package, called Pomelo, that allows the business model creation with simple command line snippets
+   - Later has been extended to a Razor Pages project, because of the fast implementation and scalability. This serves a Web-UI exclusively for Administrators:
+      - accessible on https://ip-address:7013/Admin
 
 3. **Shared Library (GymTracker_Shared_DTOs)**  
    - Contains models, DTOs, and configuration classes shared between the frontend and the backend to apply the SOLID Principles

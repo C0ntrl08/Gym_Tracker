@@ -1,6 +1,3 @@
-using System.Net.Http.Headers;
-using System.Text.Json;
-
 namespace GymTrackerApi.Pages.Admin
 {
     public class CreateExerciseModel : PageModel

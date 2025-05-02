@@ -1,6 +1,4 @@
-﻿using GymTracker_Shared_DTOs;
-
-namespace GymTrackerApi.Controllers
+﻿namespace GymTrackerApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

@@ -2,3 +2,5 @@
 dotnet_diagnostic.IDE0290.severity = silent
 dotnet_diagnostic.IDE0300.severity = silent
 dotnet_diagnostic.IDE0028.severity = silent
+dotnet_diagnostic.IDE0090.severity = silent
+dotnet_diagnostic.IDE0305.severity = silent

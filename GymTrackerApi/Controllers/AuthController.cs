@@ -1,6 +1,4 @@
-﻿using GymTrackerApi.Services;
-
-namespace GymTrackerApi.Controllers
+﻿namespace GymTrackerApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
