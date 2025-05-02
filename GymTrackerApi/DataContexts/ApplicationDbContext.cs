@@ -309,6 +309,30 @@
                     Category = "Aerobic Exercises"
                 }
             );
+
+            // Seed application users for deployment.
+            modelBuilder.Entity<ApplicationUser>().HasData(
+                new ApplicationUser
+                {
+                    Id = 1,
+                    FirstName = "admin",
+                    LastName = "admin",
+                    EmailAddress = "admin@admin.com",
+                    // Replace the following placeholder with the actual hash generated from "admin123" (for example)
+                    HashedPassword = "AQAAAAIAAYagAAAAEH/PGikOyAZ7KxRXhWzzY6M1fa+3bbNVZ4y+ALTOM2CYBZCHrxxVwBf4ZHna/WAaSw==",
+                    Role = "Admin"
+                },
+                new ApplicationUser
+                {
+                    Id = 2,
+                    FirstName = "test",
+                    LastName = "test",
+                    EmailAddress = "test@test.com",
+                    // Replace with the hash for a chosen default user password (e.g., "user123")
+                    HashedPassword = "AQAAAAIAAYagAAAAEN/D4c1rNJwnqOY0iqRyqqIN3VoC9ScYdSHwkqXbCS4yr/Zt99fkbo7agnlK99C6+Q==",
+                    Role = "User"
+                }
+            );
         }
     }
 }
