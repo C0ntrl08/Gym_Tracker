@@ -1,0 +1,37 @@
+﻿@page
+@model GymTrackerApi.Pages.Admin.IndexModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Admin Login";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="form-container">
+        <h2>Admin Login</h2>
+        <form method="post">
+            <div class="form-group">
+                <label>Email Address:</label>
+                <input type="email" asp-for="Login.EmailAddress" required />
+            </div>
+            <div class="form-group">
+                <label>Password:</label>
+                <input type="password" asp-for="Login.Password" required />
+            </div>
+            <div class="button-container">
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+        </form>
+
+        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <div class="status-message">@Model.ErrorMessage</div>
+        }
+    </div>
+</body>
+</html>

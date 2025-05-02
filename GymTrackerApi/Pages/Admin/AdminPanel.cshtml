@@ -1,0 +1,26 @@
+﻿@page
+@model GymTrackerApi.Pages.Admin.AdminPanelModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="dashboard-container">
+        <h2>Admin Panel</h2>
+        <div class="button-container">
+            <a asp-page="ManageExercises" class="btn btn-primary">Manage Exercises</a>
+            <a asp-page="CreateExercise" class="btn btn-success">Create New Exercise</a>
+        </div>
+        <form method="post" asp-page-handler="Logout">
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
+    </div>
+</body>
+</html>

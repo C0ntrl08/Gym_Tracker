@@ -27,3 +27,7 @@ global using GymTracker_Shared_DTOs;
 
 
 global using System.Collections.Generic;
+
+// For Admin Razor Pages
+global using Microsoft.AspNetCore.Mvc.RazorPages;
+global using System.Text.Json;

@@ -1,0 +1,53 @@
+﻿@page
+@model GymTrackerApi.Pages.Admin.ManageExercisesModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Manage Exercises";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Exercises</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <h2>Manage Exercises</h2>
+    @if (Model.Exercises == null || !Model.Exercises.Any())
+    {
+        <p>No exercises found.</p>
+    }
+    else
+    {
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Difficulty</th>
+                    <th>Category</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var exercise in Model.Exercises)
+                {
+                    <tr>
+                        <td>@exercise.Name</td>
+                        <td>@exercise.Description</td>
+                        <td>@exercise.Difficulty</td>
+                        <td>@exercise.Category</td>
+                        <td>
+                            <a asp-page="EditExercise" asp-route-id="@exercise.Id" class="btn btn-warning">Edit</a>
+                            <a asp-page="DeleteExercise" asp-route-id="@exercise.Id" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    <div>
+        <a asp-page="AdminPanel" class="btn btn-primary">Back to Admin Panel</a>
+    </div>
+</body>
+</html>

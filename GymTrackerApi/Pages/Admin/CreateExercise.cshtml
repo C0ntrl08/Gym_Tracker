@@ -1,0 +1,66 @@
+﻿@page
+@model GymTrackerApi.Pages.Admin.CreateExerciseModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Create Exercise";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create New Exercise</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="form-container">
+        <h2>Create New Exercise</h2>
+        <form method="post">
+            <div class="form-group">
+                <label>Name:</label>
+                <input type="text" asp-for="Exercise.Name" required />
+            </div>
+            <div class="form-group">
+                <label>Description:</label>
+                <textarea asp-for="Exercise.Description" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Base Image URL:</label>
+                <input type="text" asp-for="Exercise.BaseImage" />
+            </div>
+            <div class="form-group">
+                <label>Long Description:</label>
+                <textarea asp-for="Exercise.LongDescription"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Video URL:</label>
+                <input type="text" asp-for="Exercise.VideoUrl" />
+            </div>
+            <div class="form-group">
+                <label>Difficulty:</label>
+                <select asp-for="Exercise.Difficulty">
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Category:</label>
+                <select asp-for="Exercise.Category" required>
+                    <option value="Bodyweight Exercises">Bodyweight Exercise</option>
+                    <option value="Weight Training Exercises">Weight Training Exercise</option>
+                    <option value="Aerobic Exercises">Aerobic Exercise</option>
+                </select>
+            </div>
+            <div class="button-container">
+                <button type="submit" class="btn btn-success" asp-page-handler="Create">Create</button>
+                <a href="@Url.Page("AdminPanel")" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+
+        @if (!string.IsNullOrEmpty(Model.StatusMessage))
+        {
+            <div class="status-message">@Model.StatusMessage</div>
+        }
+    </div>
+</body>
+</html>
