@@ -1,0 +1,78 @@
+﻿@page "{id:int}"
+@model GymTrackerApi.Pages.Admin.EditExerciseModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Edit Exercise";
+}
+
+<h2>Edit Exercise</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="Exercise.Id" />
+
+    <div class="form-group">
+        <label asp-for="Exercise.Name"></label>
+        <input asp-for="Exercise.Name" class="form-control" />
+        <span asp-validation-for="Exercise.Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Exercise.Description"></label>
+        <input asp-for="Exercise.Description" class="form-control" />
+        <span asp-validation-for="Exercise.Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Exercise.BaseImage"></label>
+        <input asp-for="Exercise.BaseImage" class="form-control" />
+        <span asp-validation-for="Exercise.BaseImage" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Exercise.LongDescription"></label>
+        <textarea asp-for="Exercise.LongDescription" class="form-control"></textarea>
+        <span asp-validation-for="Exercise.LongDescription" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Exercise.VideoUrl"></label>
+        <input asp-for="Exercise.VideoUrl" class="form-control" />
+        <span asp-validation-for="Exercise.VideoUrl" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Exercise.Difficulty"></label>
+        <select asp-for="Exercise.Difficulty" class="form-control">
+            <option value="0">Easy</option>
+            <option value="1">Medium</option>
+            <option value="2">Hard</option>
+        </select>
+        <span asp-validation-for="Exercise.Difficulty" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Exercise.Category"></label>
+        <input asp-for="Exercise.Category" class="form-control" />
+        <span asp-validation-for="Exercise.Category" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-page="ManageExercises" class="btn btn-secondary">Cancel</a>
+</form>
+
+@if (Model.UpdateSucceeded)
+{
+    <div class="alert alert-success mt-3">
+        @Model.SuccessMessage
+    </div>
+    <script>
+        // After a delay, automatically navigate back to the Manage Exercises page.
+        setTimeout(function () {
+            window.location.href = '@Url.Page("ManageExercises")';
+        }, 2000); // 2000 milliseconds = 2 seconds
+    </script>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
